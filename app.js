@@ -524,8 +524,23 @@ function nextWeeklyTest(){
   const result=document.getElementById("testResult"); result.classList.remove("hidden");
   result.innerHTML="<h3>"+(pct>=80?"✅ Evaluación aprobada":"📚 Necesita refuerzo")+"</h3><p><strong>"+testCorrect+"/"+weeklyTest.length+" correctas · "+pct+"%</strong></p><p>Meta recomendada: 80% o más.</p>";
   localStorage.setItem("evt_test_"+getISOWeekKey(new Date()),JSON.stringify({correct:testCorrect,total:weeklyTest.length,pct,date:new Date().toISOString()}));
+  renderB2Progress();
 }
 document.getElementById("testCheck")?.addEventListener("click",checkWeeklyTest);
 document.getElementById("testNext")?.addEventListener("click",nextWeeklyTest);
 document.getElementById("testAnswer")?.addEventListener("keydown",e=>{if(e.key==="Enter"&&!testLocked)checkWeeklyTest();});
 prepareWeeklyTest();
+
+const B2_START=new Date("2026-09-13T00:00:00"), B2_END=new Date("2027-08-31T23:59:59");
+function totalB2Weeks(){return Math.max(1,Math.ceil((B2_END-B2_START)/(7*86400000)));}
+function renderB2Progress(){
+ const pctEl=document.getElementById("b2Progress"),fill=document.getElementById("b2ProgressFill"),note=document.getElementById("b2Note");
+ if(!pctEl) return;
+ const keys=Object.keys(localStorage).filter(k=>k.startsWith("evt_test_"));
+ let approved=0;
+ keys.forEach(k=>{try{const x=JSON.parse(localStorage.getItem(k));if(x&&x.pct>=80)approved++;}catch(e){}});
+ const total=totalB2Weeks(), pct=Math.min(100,Math.round(approved/total*100));
+ pctEl.textContent=pct+"%"; if(fill) fill.style.width=pct+"%";
+ if(note) note.textContent=approved+" de "+total+" hitos semanales aprobados · Cada evaluación con ≥80% cuenta como 1 hito.";
+}
+renderB2Progress();
