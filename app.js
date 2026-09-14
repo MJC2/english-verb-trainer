@@ -158,6 +158,7 @@ function checkAnswer() {
   }
   saveStats();
   renderStats();
+  markWeeklyPractice();
 }
 let availableVoices = [];
 function refreshVoices() {
@@ -420,3 +421,54 @@ renderPrep();
 
 renderQuestion();
 renderStats();
+
+function getISOWeekKey(date=new Date()){
+  const d=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate()));
+  const day=d.getUTCDay()||7;
+  d.setUTCDate(d.getUTCDate()+4-day);
+  const yearStart=new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  const week=Math.ceil((((d-yearStart)/86400000)+1)/7);
+  return d.getUTCFullYear()+"-W"+String(week).padStart(2,"0");
+}
+function markWeeklyPractice(){
+  const today=new Date();
+  const key=getISOWeekKey(today);
+  let weeks=JSON.parse(localStorage.getItem("evt_practice_weeks")||"[]");
+  if(!weeks.includes(key)){ weeks.push(key); weeks=weeks.slice(-104); }
+  localStorage.setItem("evt_practice_weeks",JSON.stringify(weeks));
+  localStorage.setItem("evt_last_practice",today.toISOString());
+  renderWeeklyProgress();
+}
+function weekKeyToIndex(key){
+  const [y,w]=key.replace("W","").split("-").map(Number);
+  return y*53+w;
+}
+function renderWeeklyProgress(){
+  const weeks=JSON.parse(localStorage.getItem("evt_practice_weeks")||"[]").sort();
+  const current=getISOWeekKey(new Date());
+  const status=document.getElementById("weekStatus");
+  const streakEl=document.getElementById("weekStreak");
+  const lastEl=document.getElementById("lastPractice");
+  if(status) status.textContent=weeks.includes(current)?"✅ Practicado":"⏳ Aún no practicas";
+
+  let streak=0;
+  if(weeks.length){
+    const set=new Set(weeks);
+    let cursor=weekKeyToIndex(current);
+    if(!set.has(current)) cursor--;
+    while(true){
+      let found=false;
+      for(const k of set){ if(weekKeyToIndex(k)===cursor){ found=true; break; } }
+      if(!found) break;
+      streak++; cursor--;
+    }
+  }
+  if(streakEl) streakEl.textContent=streak+" "+(streak===1?"semana":"semanas");
+
+  const last=localStorage.getItem("evt_last_practice");
+  if(lastEl && last){
+    const d=new Date(last);
+    lastEl.textContent=d.toLocaleDateString("es-CL");
+  }
+}
+renderWeeklyProgress();
