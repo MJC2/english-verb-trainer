@@ -641,3 +641,9 @@ body { padding-top: 92px; }
  .level-word{grid-template-columns:1fr 22px!important;min-height:70px!important;padding:9px 10px!important}
  .word-audio{width:20px!important;height:20px!important;min-width:20px!important;min-height:20px!important;max-width:20px!important;max-height:20px!important;font-size:12px!important;line-height:20px!important}
 }
+
+.weekly-progress{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 20px}
+.weekly-progress>div{background:#0b1220;border:1px solid #2b3b52;border-radius:12px;padding:13px}
+.weekly-progress span{display:block;color:var(--muted);font-size:.78rem;margin-bottom:5px}
+.weekly-progress strong{font-size:1rem;color:#e0f2fe}
+@media(max-width:760px){.weekly-progress{grid-template-columns:1fr 1fr}.weekly-progress>div:last-child{grid-column:1/-1}}
