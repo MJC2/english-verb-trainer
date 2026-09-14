@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English Verb Trainer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <p class="eyebrow">Entrenamiento de inglés</p>
+      <h1>English Verb Trainer</h1>
+      <p>Escucha, piensa, responde en inglés y corrige tus errores.</p>
+    </header>
+
+    <section class="panel controls">
+      <label>
+        Tiempo verbal
+        <select id="tenseFilter">
+          <option value="all">Todos</option>
+          <option value="Present Simple">Present Simple</option>
+          <option value="Past Simple">Past Simple</option>
+          <option value="Present Continuous">Present Continuous</option>
+          <option value="Present Perfect">Present Perfect</option>
+          <option value="Future Simple">Future Simple</option>
+        </select>
+      </label>
+      <button id="newQuestion">Nueva frase</button>
+    </section>
+
+    <section class="panel question">
+      <span class="badge" id="tenseBadge">Present Simple</span>
+      <p class="label">Traduce al inglés:</p>
+      <h2 id="spanishSentence">Ella dice eso todos los días.</h2>
+
+      <div class="actions">
+        <button class="secondary" id="listenSpanish">🔊 Escuchar español</button>
+        <button class="secondary" id="listenVerb">🔊 Escuchar verbo</button>
+      </div>
+
+      <div class="verb-card">
+        <div><span>Verbo</span><strong id="verbBase">say</strong></div>
+        <div><span>Pasado</span><strong id="verbPast">said</strong></div>
+        <div><span>Participio</span><strong id="verbParticiple">said</strong></div>
+        <div><span>Significado</span><strong id="verbMeaning">decir</strong></div>
+      </div>
+    </section>
+
+    <section class="panel answer-panel">
+      <label for="answer">Tu respuesta en inglés</label>
+      <textarea id="answer" placeholder="Ej: She says that every day."></textarea>
+
+      <div class="actions">
+        <button id="checkAnswer">Comprobar</button>
+        <button class="success" id="speakAnswer">🎙️ Responder hablando</button>
+        <button class="secondary" id="showAnswer">Ver respuesta</button>
+      </div>
+
+      <div id="feedback" class="feedback hidden"></div>
+    </section>
+
+    <section class="panel stats">
+      <div><span>Aciertos</span><strong id="correctCount">0</strong></div>
+      <div><span>Intentos</span><strong id="totalCount">0</strong></div>
+      <div><span>Precisión</span><strong id="accuracy">0%</strong></div>
+    </section>
+
+    <section class="panel">
+      <h3>Errores para repasar</h3>
+      <div id="mistakes" class="mistakes">
+        <p class="muted">Todavía no tienes errores guardados.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
