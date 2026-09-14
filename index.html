@@ -16,6 +16,7 @@
       <nav class="tabs" aria-label="Secciones principales">
         <button class="tab-button active" data-tab="practice">🎯 Practicar</button>
         <button class="tab-button" data-tab="grammar">📘 Gramática y tiempos</button>
+        <button class="tab-button" data-tab="prepositions">🧭 Preposiciones</button>
       </nav>
     </header>
 
@@ -85,6 +86,57 @@
         <h3>Errores para repasar</h3>
         <div id="mistakes" class="mistakes">
           <p class="muted">Todavía no tienes errores guardados.</p>
+        </div>
+      </section>
+    </section>
+
+    <section id="prepositions" class="tab-content">
+      <section class="panel grammar-shell">
+        <div class="grammar-header">
+          <div><p class="eyebrow">Place · Time · Movement</p><h2>Preposiciones</h2></div>
+          <select id="prepSelect">
+            <option value="practice">🎯 Practicar preposiciones</option>
+            <option value="summary">📋 Resumen</option>
+          </select>
+        </div>
+        <div id="prepPractice">
+          <div class="panel question prep-inner">
+            <span class="badge" id="prepCategory">Lugar</span>
+            <p class="label">Traduce al inglés usando la preposición correcta:</p>
+            <h2 id="prepSpanish"></h2>
+            <div class="prep-hint"><span>Preposición objetivo</span><strong id="prepWord"></strong><small id="prepMeaning"></small></div>
+          </div>
+          <div class="panel answer-panel prep-inner">
+            <label for="prepAnswer">Tu respuesta en inglés</label>
+            <textarea id="prepAnswer"></textarea>
+            <div class="actions">
+              <button id="prepCheck">Comprobar</button>
+              <button class="success" id="prepSpeak">🎙️ Responder hablando</button>
+              <button class="secondary" id="prepShow">Ver respuesta</button>
+              <button class="secondary" id="prepListen">🔊 Escuchar respuesta correcta</button>
+              <button id="prepNext">Nueva frase</button>
+            </div>
+            <div id="prepFeedback" class="feedback hidden"></div>
+          </div>
+        </div>
+        <div id="prepSummary" class="hidden">
+          <p class="muted">Basado en tu material: preposiciones de lugar, tiempo y movimiento.</p>
+          <div class="tense-table-wrap">
+            <table class="tense-table"><thead><tr><th>Tipo</th><th>Preposición</th><th>Uso</th><th>Ejemplo</th><th>Español</th></tr></thead>
+            <tbody>
+              <tr><td>Lugar</td><td>in</td><td>dentro de un lugar, área o sistema</td><td>We track costs in AWS and Azure.</td><td>Monitoreamos costos en AWS y Azure.</td></tr>
+              <tr><td>Lugar</td><td>on</td><td>sobre una superficie, documento o plataforma</td><td>The report is on the dashboard.</td><td>El informe está en el panel.</td></tr>
+              <tr><td>Lugar/Tiempo</td><td>at</td><td>punto específico / hora específica</td><td>We review costs at 9 a.m.</td><td>Revisamos costos a las 9 a. m.</td></tr>
+              <tr><td>Lugar/Tiempo</td><td>between</td><td>entre dos elementos</td><td>The cost is between $5,000 and $10,000.</td><td>El costo está entre $5.000 y $10.000.</td></tr>
+              <tr><td>Lugar</td><td>among</td><td>entre un grupo</td><td>FinOps works among different teams.</td><td>FinOps trabaja entre diferentes equipos.</td></tr>
+              <tr><td>Tiempo</td><td>by</td><td>antes de un límite</td><td>The report is due by Friday.</td><td>El informe debe estar listo para el viernes.</td></tr>
+              <tr><td>Movimiento</td><td>to</td><td>hacia un destino</td><td>We walk to the office.</td><td>Caminamos a la oficina.</td></tr>
+              <tr><td>Movimiento</td><td>into</td><td>desde afuera hacia adentro</td><td>Data is transferred into the cloud system.</td><td>Los datos se transfieren al sistema cloud.</td></tr>
+              <tr><td>Movimiento</td><td>from</td><td>punto de origen</td><td>The report comes from the finance team.</td><td>El informe viene del equipo de finanzas.</td></tr>
+              <tr><td>Movimiento</td><td>towards</td><td>en dirección a algo</td><td>We work towards better efficiency.</td><td>Trabajamos hacia una mejor eficiencia.</td></tr>
+              <tr><td>Movimiento</td><td>through</td><td>a través de algo</td><td>We review costs through dashboards.</td><td>Revisamos costos a través de dashboards.</td></tr>
+            </tbody></table>
+          </div>
         </div>
       </section>
     </section>
@@ -169,6 +221,6 @@
     </section>
   </main>
 
-  <script src="app.js?v=20260913-3"></script>
+  <script src="app.js?v=20260913-4"></script>
 </body>
 </html>
