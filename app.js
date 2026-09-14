@@ -24,6 +24,7 @@ document.querySelectorAll(".tab-button").forEach(button => {
     document.querySelectorAll(".tab-content").forEach(section => section.classList.remove("active"));
     button.classList.add("active");
     document.getElementById(button.dataset.tab).classList.add("active");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 });
 
@@ -109,10 +110,10 @@ function checkAnswer() {
   if (isCorrect) {
     correct++;
     els.feedback.className = "feedback correct";
-    els.feedback.innerHTML = `✅ Correcto.<br><strong>${current.en}</strong><div class="answer-pronunciation">🗣️ ${current.enPh}</div><button class="feedback-audio" onclick="speak(current.en, 'en-US')">🔊 Escuchar frase correcta</button>`;
+    els.feedback.innerHTML = `✅ Correcto.<br><strong>${current.en}</strong><div class="answer-pronunciation">🗣️ ${current.enPh}</div><button class="feedback-audio" data-action="play-correct">🔊 Escuchar frase correcta</button>`;
   } else {
     els.feedback.className = "feedback incorrect";
-    els.feedback.innerHTML = `❌ Tu respuesta: <strong>${user}</strong><br>✅ Correcta: <strong>${current.en}</strong><div class="answer-pronunciation">🗣️ ${current.enPh}</div><button class="feedback-audio" onclick="speak(current.en, 'en-US')">🔊 Escuchar frase correcta</button>`;
+    els.feedback.innerHTML = `❌ Tu respuesta: <strong>${user}</strong><br>✅ Correcta: <strong>${current.en}</strong><div class="answer-pronunciation">🗣️ ${current.enPh}</div><button class="feedback-audio" data-action="play-correct">🔊 Escuchar frase correcta</button>`;
     if (!mistakeList.some(m => m.es === current.es)) {
       mistakeList.unshift({ es: current.es, en: current.en, tense: current.tense });
       mistakeList = mistakeList.slice(0, 30);
@@ -121,12 +122,29 @@ function checkAnswer() {
   saveStats();
   renderStats();
 }
-function speak(text, lang) {
+let availableVoices = [];
+function refreshVoices() {
+  availableVoices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+}
+refreshVoices();
+if ("speechSynthesis" in window) {
+  speechSynthesis.onvoiceschanged = refreshVoices;
+}
+
+function speak(text, lang = "en-US") {
+  if (!("speechSynthesis" in window)) {
+    alert("Tu navegador no tiene síntesis de voz disponible.");
+    return;
+  }
   speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = lang;
-  utterance.rate = 0.9;
-  speechSynthesis.speak(utterance);
+  utterance.rate = 0.82;
+  utterance.pitch = 1;
+  const base = lang.toLowerCase().slice(0,2);
+  const voice = availableVoices.find(v => v.lang && v.lang.toLowerCase().startsWith(base));
+  if (voice) utterance.voice = voice;
+  setTimeout(() => speechSynthesis.speak(utterance), 80);
 }
 function startSpeechRecognition() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -151,7 +169,7 @@ els.tenseFilter.addEventListener("change", pickQuestion);
 els.checkAnswer.addEventListener("click", checkAnswer);
 els.showAnswer.addEventListener("click", () => {
   els.feedback.className = "feedback incorrect";
-  els.feedback.innerHTML = `Respuesta correcta: <strong>${current.en}</strong><div class="answer-pronunciation">🗣️ ${current.enPh}</div><button class="feedback-audio" onclick="speak(current.en, 'en-US')">🔊 Escuchar frase correcta</button>`;
+  els.feedback.innerHTML = `Respuesta correcta: <strong>${current.en}</strong><div class="answer-pronunciation">🗣️ ${current.enPh}</div><button class="feedback-audio" data-action="play-correct">🔊 Escuchar frase correcta</button>`;
 });
 els.listenSpanish.addEventListener("click", () => speak(current.es, "es-ES"));
 els.listenVerb.addEventListener("click", () => speak(
@@ -160,12 +178,178 @@ els.listenVerb.addEventListener("click", () => speak(
 ));
 els.speakAnswer.addEventListener("click", startSpeechRecognition);
 els.listenCorrect.addEventListener("click", () => speak(current.en, "en-US"));
+els.feedback.addEventListener("click", (e) => {
+  const button = e.target.closest('[data-action="play-correct"]');
+  if (button) speak(current.en, "en-US");
+});
 els.answer.addEventListener("keydown", e => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
     checkAnswer();
   }
 });
+
+
+const grammarData = {
+  "Present Simple": {
+    title: "Rutinas, hábitos y hechos",
+    idea: "Se usa para acciones habituales, rutinas, hechos generales y horarios.",
+    formula: "+ I/You/We/They + base verb<br>+ He/She/It + verb-s",
+    negative: "do not / does not + verbo base",
+    question: "Do/Does + sujeto + verbo base?",
+    example: "<strong>She works every day.</strong><br><span>Ella trabaja todos los días.</span>",
+    keywords: "Claves: every day, always, usually, often, sometimes, never"
+  },
+  "Present Continuous": {
+    title: "Acciones que ocurren ahora",
+    idea: "Se usa para algo que está sucediendo en este momento o es temporal.",
+    formula: "Subject + am/is/are + verb-ing",
+    negative: "am/is/are not + verb-ing",
+    question: "Am/Is/Are + sujeto + verb-ing?",
+    example: "<strong>She is working now.</strong><br><span>Ella está trabajando ahora.</span>",
+    keywords: "Claves: now, right now, at the moment, currently"
+  },
+  "Present Perfect": {
+    title: "Pasado conectado con el presente",
+    idea: "Se usa para experiencias, resultados recientes o acciones pasadas que siguen siendo relevantes.",
+    formula: "Subject + have/has + past participle",
+    negative: "have/has not + participio",
+    question: "Have/Has + sujeto + participio?",
+    example: "<strong>I have finished the report.</strong><br><span>He terminado el informe.</span>",
+    keywords: "Claves: already, yet, ever, never, just, for, since"
+  },
+  "Present Perfect Continuous": {
+    title: "Duración hasta el presente",
+    idea: "La acción comenzó antes y continúa ahora, o acaba de terminar.",
+    formula: "Subject + have/has been + verb-ing",
+    negative: "have/has not been + verb-ing",
+    question: "Have/Has + sujeto + been + verb-ing?",
+    example: "<strong>I have been studying for two hours.</strong><br><span>He estado estudiando durante dos horas.</span>",
+    keywords: "Claves: for, since, all day, lately, recently"
+  },
+  "Past Simple": {
+    title: "Acción terminada en el pasado",
+    idea: "Se usa cuando la acción ocurrió y terminó en un momento pasado.",
+    formula: "+ Subject + past verb<br>- Subject + did not + base verb<br>? Did + subject + base verb?",
+    negative: "did not + verbo base",
+    question: "Did + sujeto + verbo base?",
+    example: "<strong>She went to the office yesterday.</strong><br><span>Ella fue a la oficina ayer.</span>",
+    keywords: "Claves: yesterday, last week, ago, in 2025"
+  },
+  "Past Continuous": {
+    title: "Acción en progreso en el pasado",
+    idea: "Se usa para una acción que estaba ocurriendo en un momento pasado.",
+    formula: "Subject + was/were + verb-ing",
+    negative: "was/were not + verb-ing",
+    question: "Was/Were + sujeto + verb-ing?",
+    example: "<strong>I was working when you called.</strong><br><span>Yo estaba trabajando cuando llamaste.</span>",
+    keywords: "Claves: while, when, at 8 p.m."
+  },
+  "Past Perfect": {
+    title: "Una acción ocurrió antes de otra en el pasado",
+    idea: "Marca cuál de dos acciones pasadas ocurrió primero.",
+    formula: "Subject + had + past participle",
+    negative: "had not + participio",
+    question: "Had + sujeto + participio?",
+    example: "<strong>She had left before I arrived.</strong><br><span>Ella se había ido antes de que yo llegara.</span>",
+    keywords: "Claves: before, after, already, by the time"
+  },
+  "Past Perfect Continuous": {
+    title: "Duración antes de un momento pasado",
+    idea: "Enfatiza cuánto tiempo llevaba ocurriendo una acción antes de otra acción pasada.",
+    formula: "Subject + had been + verb-ing",
+    negative: "had not been + verb-ing",
+    question: "Had + sujeto + been + verb-ing?",
+    example: "<strong>I had been working for three hours before lunch.</strong><br><span>Había estado trabajando durante tres horas antes del almuerzo.</span>",
+    keywords: "Claves: for, since, before"
+  },
+  "Future Simple": {
+    title: "Predicciones, decisiones y promesas",
+    idea: "Se usa para decisiones espontáneas, predicciones, promesas y ofertas.",
+    formula: "Subject + will + base verb",
+    negative: "will not / won't + verbo base",
+    question: "Will + sujeto + verbo base?",
+    example: "<strong>I will call you tomorrow.</strong><br><span>Te llamaré mañana.</span>",
+    keywords: "Claves: tomorrow, next week, I think, probably"
+  },
+  "Be Going To": {
+    title: "Planes e intenciones",
+    idea: "Se usa cuando ya existe una intención o hay evidencia de lo que ocurrirá.",
+    formula: "Subject + am/is/are going to + base verb",
+    negative: "am/is/are not going to + verbo base",
+    question: "Am/Is/Are + sujeto + going to + verbo base?",
+    example: "<strong>I am going to study tonight.</strong><br><span>Voy a estudiar esta noche.</span>",
+    keywords: "Claves: plan, intention, evidence"
+  },
+  "Future Continuous": {
+    title: "Acción que estará en progreso",
+    idea: "Describe algo que estará ocurriendo en un momento futuro.",
+    formula: "Subject + will be + verb-ing",
+    negative: "will not be + verb-ing",
+    question: "Will + sujeto + be + verb-ing?",
+    example: "<strong>I will be working at 10 a.m.</strong><br><span>Estaré trabajando a las 10.</span>",
+    keywords: "Claves: this time tomorrow, at 10 a.m."
+  },
+  "Future Perfect": {
+    title: "Acción completada antes de un momento futuro",
+    idea: "Se usa para algo que ya estará terminado antes de una fecha o momento futuro.",
+    formula: "Subject + will have + past participle",
+    negative: "will not have + participio",
+    question: "Will + sujeto + have + participio?",
+    example: "<strong>I will have finished by Friday.</strong><br><span>Habré terminado para el viernes.</span>",
+    keywords: "Claves: by Friday, by then, by the time"
+  },
+  "Future Perfect Continuous": {
+    title: "Duración hasta un punto futuro",
+    idea: "Enfatiza cuánto tiempo llevará ocurriendo una acción hasta un momento futuro.",
+    formula: "Subject + will have been + verb-ing",
+    negative: "will not have been + verb-ing",
+    question: "Will + sujeto + have been + verb-ing?",
+    example: "<strong>By June, I will have been working here for two years.</strong><br><span>En junio, llevaré dos años trabajando aquí.</span>",
+    keywords: "Claves: for, by, by the time"
+  }
+};
+
+const grammarEls = {
+  select: document.getElementById("grammarSelect"),
+  badge: document.getElementById("grammarBadge"),
+  title: document.getElementById("grammarTitle"),
+  idea: document.getElementById("grammarIdea"),
+  formula: document.getElementById("grammarFormula"),
+  negative: document.getElementById("grammarNegative"),
+  question: document.getElementById("grammarQuestion"),
+  example: document.getElementById("grammarExample"),
+  keywords: document.getElementById("grammarKeywords")
+};
+
+function showGrammarTense(name) {
+  const item = grammarData[name];
+  if (!item) return;
+  grammarEls.select.value = name;
+  grammarEls.badge.textContent = name;
+  grammarEls.title.textContent = item.title;
+  grammarEls.idea.textContent = item.idea;
+  grammarEls.formula.innerHTML = item.formula;
+  grammarEls.negative.textContent = item.negative;
+  grammarEls.question.textContent = item.question;
+  grammarEls.example.innerHTML = item.example;
+  grammarEls.keywords.textContent = item.keywords;
+  document.querySelectorAll(".grammar-tab").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.tense === name);
+  });
+}
+
+grammarEls.select.addEventListener("change", e => showGrammarTense(e.target.value));
+document.getElementById("grammarTabs").addEventListener("click", e => {
+  const btn = e.target.closest(".grammar-tab");
+  if (!btn) return;
+  if (btn.dataset.tense === "more") {
+    grammarEls.select.focus();
+    return;
+  }
+  showGrammarTense(btn.dataset.tense);
+});
+showGrammarTense("Present Simple");
 
 renderQuestion();
 renderStats();
