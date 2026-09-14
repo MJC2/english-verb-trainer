@@ -647,3 +647,5 @@ body { padding-top: 92px; }
 .weekly-progress span{display:block;color:var(--muted);font-size:.78rem;margin-bottom:5px}
 .weekly-progress strong{font-size:1rem;color:#e0f2fe}
 @media(max-width:760px){.weekly-progress{grid-template-columns:1fr 1fr}.weekly-progress>div:last-child{grid-column:1/-1}}
+
+#weekly-test{min-height:calc(100vh - 120px)}.test-shell{max-width:760px;margin:0 auto}.test-empty,.test-question,.test-result{margin-top:16px;background:#0b1220;border:1px solid #2b3b52;border-radius:14px;padding:18px}.test-empty p{color:var(--muted);margin:7px 0 0}.test-progress{display:flex;justify-content:space-between;color:#7dd3fc;margin:16px 2px 0}.test-question h3{font-size:1.35rem;line-height:1.4}.test-question input{margin:14px 0 10px}.test-result{text-align:center}.test-result h3{margin-top:0}@media(max-width:760px){.test-shell{padding:15px!important}.test-empty,.test-question,.test-result{padding:15px}.test-question h3{font-size:1.18rem}}
