@@ -572,3 +572,58 @@ body { padding-top: 92px; }
     text-align: right !important;
   }
 }
+
+/* Compact vocabulary cards: two columns on mobile */
+@media (max-width: 760px) {
+  .level-word-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .level-word {
+    grid-template-columns: 1fr 30px !important;
+    grid-template-areas:
+      "word audio"
+      "meaning audio"
+      "phonetic audio" !important;
+    padding: 10px !important;
+    min-height: 82px !important;
+  }
+
+  .level-word strong {
+    font-size: .95rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .level-word span {
+    font-size: .78rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .level-word small {
+    font-size: .72rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .word-audio {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+    font-size: .78rem !important;
+  }
+
+  .level-words-label {
+    margin-bottom: 8px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .level-word-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .level-word {
+    padding: 9px !important;
+  }
+}
