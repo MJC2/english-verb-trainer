@@ -11,66 +11,213 @@
     <header class="hero">
       <p class="eyebrow">Entrenamiento de inglés</p>
       <h1>English Verb Trainer</h1>
-      <p>Escucha, piensa, responde en inglés y corrige tus errores.</p>
+      <p>Escucha, piensa, responde en inglés y aprende la gramática paso a paso.</p>
     </header>
 
-    <section class="panel controls">
-      <label>
-        Tiempo verbal
-        <select id="tenseFilter">
-          <option value="all">Todos</option>
-          <option value="Present Simple">Present Simple</option>
-          <option value="Past Simple">Past Simple</option>
-          <option value="Present Continuous">Present Continuous</option>
-          <option value="Present Perfect">Present Perfect</option>
-          <option value="Future Simple">Future Simple</option>
-        </select>
-      </label>
-      <button id="newQuestion">Nueva frase</button>
+    <nav class="tabs" aria-label="Secciones principales">
+      <button class="tab-button active" data-tab="practice">🎯 Practicar</button>
+      <button class="tab-button" data-tab="grammar">📘 Gramática y tiempos</button>
+    </nav>
+
+    <section id="practice" class="tab-content active">
+      <section class="panel controls">
+        <label>
+          Tiempo verbal
+          <select id="tenseFilter">
+            <option value="all">Todos</option>
+            <option value="Present Simple">Present Simple</option>
+            <option value="Past Simple">Past Simple</option>
+            <option value="Present Continuous">Present Continuous</option>
+            <option value="Present Perfect">Present Perfect</option>
+            <option value="Future Simple">Future Simple</option>
+          </select>
+        </label>
+        <button id="newQuestion">Nueva frase</button>
+      </section>
+
+      <section class="panel question">
+        <span class="badge" id="tenseBadge">Present Simple</span>
+        <p class="label">Traduce al inglés:</p>
+        <h2 id="spanishSentence">Ella dice eso todos los días.</h2>
+
+        <div class="actions">
+          <button class="secondary" id="listenSpanish">🔊 Escuchar español</button>
+          <button class="secondary" id="listenVerb">🔊 Escuchar verbo</button>
+        </div>
+
+        <div class="verb-card">
+          <div><span>Verbo</span><strong id="verbBase">say</strong></div>
+          <div><span>Pasado</span><strong id="verbPast">said</strong></div>
+          <div><span>Participio</span><strong id="verbParticiple">said</strong></div>
+          <div><span>Significado</span><strong id="verbMeaning">decir</strong></div>
+        </div>
+      </section>
+
+      <section class="panel answer-panel">
+        <label for="answer">Tu respuesta en inglés</label>
+        <textarea id="answer" placeholder="Ej: She says that every day."></textarea>
+
+        <div class="actions">
+          <button id="checkAnswer">Comprobar</button>
+          <button class="success" id="speakAnswer">🎙️ Responder hablando</button>
+          <button class="secondary" id="showAnswer">Ver respuesta</button>
+        </div>
+
+        <div id="feedback" class="feedback hidden"></div>
+      </section>
+
+      <section class="panel stats">
+        <div><span>Aciertos</span><strong id="correctCount">0</strong></div>
+        <div><span>Intentos</span><strong id="totalCount">0</strong></div>
+        <div><span>Precisión</span><strong id="accuracy">0%</strong></div>
+      </section>
+
+      <section class="panel">
+        <h3>Errores para repasar</h3>
+        <div id="mistakes" class="mistakes">
+          <p class="muted">Todavía no tienes errores guardados.</p>
+        </div>
+      </section>
     </section>
 
-    <section class="panel question">
-      <span class="badge" id="tenseBadge">Present Simple</span>
-      <p class="label">Traduce al inglés:</p>
-      <h2 id="spanishSentence">Ella dice eso todos los días.</h2>
+    <section id="grammar" class="tab-content">
+      <section class="panel grammar-intro">
+        <p class="eyebrow">Guía rápida</p>
+        <h2>Cómo entender los tiempos verbales</h2>
+        <p>No necesitas memorizar todo de una vez. Primero identifica <strong>cuándo ocurre la acción</strong>, luego usa la estructura correspondiente.</p>
+        <div class="time-map">
+          <div><strong>Present</strong><span>ahora, hábitos o conexión con el presente</span></div>
+          <div><strong>Past</strong><span>acciones terminadas o en progreso en el pasado</span></div>
+          <div><strong>Future</strong><span>acciones, planes o resultados futuros</span></div>
+        </div>
+      </section>
 
-      <div class="actions">
-        <button class="secondary" id="listenSpanish">🔊 Escuchar español</button>
-        <button class="secondary" id="listenVerb">🔊 Escuchar verbo</button>
-      </div>
+      <section class="grammar-grid">
+        <article class="panel grammar-card">
+          <span class="badge">Present Simple</span>
+          <h3>Rutinas, hábitos y hechos</h3>
+          <p><strong>Idea:</strong> algo que ocurre normalmente.</p>
+          <div class="formula">+ I/You/We/They + verb<br>+ He/She/It + verb-s</div>
+          <p><strong>Negativo:</strong> do not / does not + verbo base</p>
+          <p><strong>Pregunta:</strong> Do/Does + sujeto + verbo base?</p>
+          <p class="example">She works every day.<br><span>Ella trabaja todos los días.</span></p>
+          <p class="keywords">Claves: every day, always, usually, often, sometimes, never</p>
+        </article>
 
-      <div class="verb-card">
-        <div><span>Verbo</span><strong id="verbBase">say</strong></div>
-        <div><span>Pasado</span><strong id="verbPast">said</strong></div>
-        <div><span>Participio</span><strong id="verbParticiple">said</strong></div>
-        <div><span>Significado</span><strong id="verbMeaning">decir</strong></div>
-      </div>
-    </section>
+        <article class="panel grammar-card">
+          <span class="badge">Present Continuous</span>
+          <h3>Acciones que están ocurriendo ahora</h3>
+          <p><strong>Idea:</strong> algo en progreso en este momento o temporal.</p>
+          <div class="formula">Subject + am/is/are + verb-ing</div>
+          <p><strong>Negativo:</strong> am/is/are not + verb-ing</p>
+          <p><strong>Pregunta:</strong> Am/Is/Are + sujeto + verb-ing?</p>
+          <p class="example">She is working now.<br><span>Ella está trabajando ahora.</span></p>
+          <p class="keywords">Claves: now, right now, at the moment, currently</p>
+        </article>
 
-    <section class="panel answer-panel">
-      <label for="answer">Tu respuesta en inglés</label>
-      <textarea id="answer" placeholder="Ej: She says that every day."></textarea>
+        <article class="panel grammar-card">
+          <span class="badge">Present Perfect</span>
+          <h3>Pasado conectado con el presente</h3>
+          <p><strong>Idea:</strong> experiencia, resultado reciente o acción que todavía importa ahora.</p>
+          <div class="formula">Subject + have/has + past participle</div>
+          <p><strong>Negativo:</strong> have/has not + participio</p>
+          <p><strong>Pregunta:</strong> Have/Has + sujeto + participio?</p>
+          <p class="example">I have finished the report.<br><span>He terminado el informe.</span></p>
+          <p class="keywords">Claves: already, yet, ever, never, just, for, since</p>
+        </article>
 
-      <div class="actions">
-        <button id="checkAnswer">Comprobar</button>
-        <button class="success" id="speakAnswer">🎙️ Responder hablando</button>
-        <button class="secondary" id="showAnswer">Ver respuesta</button>
-      </div>
+        <article class="panel grammar-card">
+          <span class="badge">Present Perfect Continuous</span>
+          <h3>Duración hasta el presente</h3>
+          <p><strong>Idea:</strong> una actividad comenzó antes y continúa o acaba de terminar.</p>
+          <div class="formula">Subject + have/has been + verb-ing</div>
+          <p class="example">I have been studying for two hours.<br><span>He estado estudiando durante dos horas.</span></p>
+          <p class="keywords">Claves: for, since, all day, lately, recently</p>
+        </article>
 
-      <div id="feedback" class="feedback hidden"></div>
-    </section>
+        <article class="panel grammar-card">
+          <span class="badge">Past Simple</span>
+          <h3>Acción terminada en el pasado</h3>
+          <p><strong>Idea:</strong> ocurrió y terminó.</p>
+          <div class="formula">+ Subject + past verb<br>- Subject + did not + base verb<br>? Did + subject + base verb?</div>
+          <p class="example">She went to the office yesterday.<br><span>Ella fue a la oficina ayer.</span></p>
+          <p class="keywords">Claves: yesterday, last week, ago, in 2025</p>
+        </article>
 
-    <section class="panel stats">
-      <div><span>Aciertos</span><strong id="correctCount">0</strong></div>
-      <div><span>Intentos</span><strong id="totalCount">0</strong></div>
-      <div><span>Precisión</span><strong id="accuracy">0%</strong></div>
-    </section>
+        <article class="panel grammar-card">
+          <span class="badge">Past Continuous</span>
+          <h3>Acción en progreso en el pasado</h3>
+          <p><strong>Idea:</strong> algo estaba ocurriendo cuando otra acción pasó.</p>
+          <div class="formula">Subject + was/were + verb-ing</div>
+          <p class="example">I was working when you called.<br><span>Yo estaba trabajando cuando llamaste.</span></p>
+          <p class="keywords">Claves: while, when, at 8 p.m.</p>
+        </article>
 
-    <section class="panel">
-      <h3>Errores para repasar</h3>
-      <div id="mistakes" class="mistakes">
-        <p class="muted">Todavía no tienes errores guardados.</p>
-      </div>
+        <article class="panel grammar-card">
+          <span class="badge">Past Perfect</span>
+          <h3>Una acción ocurrió antes de otra acción pasada</h3>
+          <div class="formula">Subject + had + past participle</div>
+          <p class="example">She had left before I arrived.<br><span>Ella se había ido antes de que yo llegara.</span></p>
+          <p class="keywords">Claves: before, after, already, by the time</p>
+        </article>
+
+        <article class="panel grammar-card">
+          <span class="badge">Past Perfect Continuous</span>
+          <h3>Duración antes de un momento pasado</h3>
+          <div class="formula">Subject + had been + verb-ing</div>
+          <p class="example">I had been working for three hours before lunch.<br><span>Había estado trabajando durante tres horas antes del almuerzo.</span></p>
+        </article>
+
+        <article class="panel grammar-card">
+          <span class="badge">Future Simple</span>
+          <h3>Predicciones, decisiones y promesas</h3>
+          <div class="formula">Subject + will + base verb</div>
+          <p><strong>Negativo:</strong> will not / won't + verbo base</p>
+          <p><strong>Pregunta:</strong> Will + sujeto + verbo base?</p>
+          <p class="example">I will call you tomorrow.<br><span>Te llamaré mañana.</span></p>
+          <p class="keywords">Claves: tomorrow, next week, I think, probably</p>
+        </article>
+
+        <article class="panel grammar-card">
+          <span class="badge">Be Going To</span>
+          <h3>Planes e intenciones</h3>
+          <div class="formula">Subject + am/is/are going to + base verb</div>
+          <p class="example">I am going to study tonight.<br><span>Voy a estudiar esta noche.</span></p>
+          <p class="keywords">Úsalo cuando ya existe una intención o evidencia.</p>
+        </article>
+
+        <article class="panel grammar-card">
+          <span class="badge">Future Continuous</span>
+          <h3>Acción que estará en progreso</h3>
+          <div class="formula">Subject + will be + verb-ing</div>
+          <p class="example">I will be working at 10 a.m.<br><span>Estaré trabajando a las 10.</span></p>
+        </article>
+
+        <article class="panel grammar-card">
+          <span class="badge">Future Perfect</span>
+          <h3>Acción completada antes de un momento futuro</h3>
+          <div class="formula">Subject + will have + past participle</div>
+          <p class="example">I will have finished by Friday.<br><span>Habré terminado para el viernes.</span></p>
+          <p class="keywords">Claves: by Friday, by then, by the time</p>
+        </article>
+
+        <article class="panel grammar-card">
+          <span class="badge">Future Perfect Continuous</span>
+          <h3>Duración hasta un punto futuro</h3>
+          <div class="formula">Subject + will have been + verb-ing</div>
+          <p class="example">By June, I will have been working here for two years.<br><span>En junio, llevaré dos años trabajando aquí.</span></p>
+        </article>
+      </section>
+
+      <section class="panel grammar-summary">
+        <h2>Regla mental rápida</h2>
+        <div class="summary-table">
+          <div><strong>Simple</strong><span>hecho, rutina o acción completa</span></div>
+          <div><strong>Continuous</strong><span>acción en progreso</span></div>
+          <div><strong>Perfect</strong><span>acción anterior conectada con otro momento</span></div>
+          <div><strong>Perfect Continuous</strong><span>duración de una acción</span></div>
+        </div>
+      </section>
     </section>
   </main>
 
