@@ -217,3 +217,19 @@ body { padding-top: 92px; }
 .prep-inner{margin-top:16px;margin-bottom:0}
 .prep-hint{margin-top:18px;background:var(--panel-2);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:4px}
 .prep-hint span{color:var(--muted);font-size:.8rem}.prep-hint strong{font-size:1.4rem;color:#7dd3fc}.prep-hint small{color:#cbd5e1}
+
+#training{min-height:calc(100vh - 120px)}
+.goal-box{margin:16px 0;background:rgba(56,189,248,.08);border:1px solid #28506a;border-radius:14px;padding:16px}
+.goal-box strong{color:#7dd3fc;font-size:1.05rem}.goal-box p{margin:7px 0 0;line-height:1.55;color:#dbe5f0}
+.study-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0 22px}
+.study-grid>div{background:var(--panel-2);padding:14px;border-radius:12px;position:relative;padding-left:52px}
+.study-grid>div>span{position:absolute;left:14px;top:14px;width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#082f49;font-weight:800}
+.study-grid strong{display:block}.study-grid p{color:var(--muted);margin:6px 0 0;line-height:1.4;font-size:.92rem}
+.level-list{display:grid;gap:8px;margin:12px 0 20px}
+.level-list>div{display:grid;grid-template-columns:90px 1.1fr 1.5fr;gap:10px;align-items:center;background:#0b1220;border:1px solid #253247;border-radius:11px;padding:11px}
+.level-list b{color:#7dd3fc}.level-list small{color:var(--muted)}
+.success-goal{border-color:rgba(34,197,94,.45);background:rgba(34,197,94,.08)}
+.success-goal strong{color:#86efac}
+.method-line{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#0b1220;border:1px solid var(--border);padding:14px;border-radius:12px}
+.method-line span{background:var(--panel-2);padding:8px 10px;border-radius:9px}.method-line b{color:var(--accent)}
+@media(max-width:760px){.study-grid{grid-template-columns:1fr}.level-list>div{grid-template-columns:1fr}.method-line b{display:none}}
