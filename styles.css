@@ -103,3 +103,11 @@ button.success { background: var(--success); color: #052e16; }
   .grammar-grid { grid-template-columns:1fr; }
   .time-map, .grammar-summary .summary-table { grid-template-columns:1fr; }
 }
+.phonetic {
+  display:block;
+  margin-top:6px;
+  color:#7dd3fc;
+  font-size:.82rem;
+  font-style:italic;
+  line-height:1.25;
+}
