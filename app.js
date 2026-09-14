@@ -1,107 +1,31 @@
 const questions = [
-  {
-    tense: "Present Simple",
-    es: "Ella dice eso todos los días.",
-    en: "She says that every day.",
-    verb: { base: "say", past: "said", participle: "said", meaning: "decir" }
-  },
-  {
-    tense: "Present Simple",
-    es: "Yo trabajo desde casa los viernes.",
-    en: "I work from home on Fridays.",
-    verb: { base: "work", past: "worked", participle: "worked", meaning: "trabajar" }
-  },
-  {
-    tense: "Present Simple",
-    es: "Él estudia inglés por la noche.",
-    en: "He studies English at night.",
-    verb: { base: "study", past: "studied", participle: "studied", meaning: "estudiar" }
-  },
-  {
-    tense: "Present Simple",
-    es: "Nosotros usamos esta herramienta todos los días.",
-    en: "We use this tool every day.",
-    verb: { base: "use", past: "used", participle: "used", meaning: "usar" }
-  },
-  {
-    tense: "Past Simple",
-    es: "Ayer terminé el informe.",
-    en: "I finished the report yesterday.",
-    verb: { base: "finish", past: "finished", participle: "finished", meaning: "terminar" }
-  },
-  {
-    tense: "Past Simple",
-    es: "Ella fue a la oficina ayer.",
-    en: "She went to the office yesterday.",
-    verb: { base: "go", past: "went", participle: "gone", meaning: "ir" }
-  },
-  {
-    tense: "Past Simple",
-    es: "Compramos comida después del trabajo.",
-    en: "We bought food after work.",
-    verb: { base: "buy", past: "bought", participle: "bought", meaning: "comprar" }
-  },
-  {
-    tense: "Past Simple",
-    es: "Él escribió un correo esta mañana.",
-    en: "He wrote an email this morning.",
-    verb: { base: "write", past: "wrote", participle: "written", meaning: "escribir" }
-  },
-  {
-    tense: "Present Continuous",
-    es: "Estoy estudiando inglés ahora.",
-    en: "I am studying English now.",
-    verb: { base: "study", past: "studied", participle: "studied", meaning: "estudiar" }
-  },
-  {
-    tense: "Present Continuous",
-    es: "Ella está trabajando en un nuevo proyecto.",
-    en: "She is working on a new project.",
-    verb: { base: "work", past: "worked", participle: "worked", meaning: "trabajar" }
-  },
-  {
-    tense: "Present Continuous",
-    es: "Estamos preparando la presentación.",
-    en: "We are preparing the presentation.",
-    verb: { base: "prepare", past: "prepared", participle: "prepared", meaning: "preparar" }
-  },
-  {
-    tense: "Present Perfect",
-    es: "Ya terminé el informe.",
-    en: "I have finished the report.",
-    verb: { base: "finish", past: "finished", participle: "finished", meaning: "terminar" }
-  },
-  {
-    tense: "Present Perfect",
-    es: "Ella ha trabajado aquí durante tres años.",
-    en: "She has worked here for three years.",
-    verb: { base: "work", past: "worked", participle: "worked", meaning: "trabajar" }
-  },
-  {
-    tense: "Present Perfect",
-    es: "Hemos visto esa película.",
-    en: "We have seen that movie.",
-    verb: { base: "see", past: "saw", participle: "seen", meaning: "ver" }
-  },
-  {
-    tense: "Future Simple",
-    es: "Mañana llamaré al cliente.",
-    en: "I will call the client tomorrow.",
-    verb: { base: "call", past: "called", participle: "called", meaning: "llamar" }
-  },
-  {
-    tense: "Future Simple",
-    es: "Ella enviará el archivo esta tarde.",
-    en: "She will send the file this afternoon.",
-    verb: { base: "send", past: "sent", participle: "sent", meaning: "enviar" }
-  },
-  {
-    tense: "Future Simple",
-    es: "Revisaremos los costos mañana.",
-    en: "We will review the costs tomorrow.",
-    verb: { base: "review", past: "reviewed", participle: "reviewed", meaning: "revisar" }
-  }
+  { tense: "Present Simple", es: "Ella dice eso todos los días.", en: "She says that every day.", verb: { base: "say", past: "said", participle: "said", meaning: "decir" } },
+  { tense: "Present Simple", es: "Yo trabajo desde casa los viernes.", en: "I work from home on Fridays.", verb: { base: "work", past: "worked", participle: "worked", meaning: "trabajar" } },
+  { tense: "Present Simple", es: "Él estudia inglés por la noche.", en: "He studies English at night.", verb: { base: "study", past: "studied", participle: "studied", meaning: "estudiar" } },
+  { tense: "Present Simple", es: "Nosotros usamos esta herramienta todos los días.", en: "We use this tool every day.", verb: { base: "use", past: "used", participle: "used", meaning: "usar" } },
+  { tense: "Past Simple", es: "Ayer terminé el informe.", en: "I finished the report yesterday.", verb: { base: "finish", past: "finished", participle: "finished", meaning: "terminar" } },
+  { tense: "Past Simple", es: "Ella fue a la oficina ayer.", en: "She went to the office yesterday.", verb: { base: "go", past: "went", participle: "gone", meaning: "ir" } },
+  { tense: "Past Simple", es: "Compramos comida después del trabajo.", en: "We bought food after work.", verb: { base: "buy", past: "bought", participle: "bought", meaning: "comprar" } },
+  { tense: "Past Simple", es: "Él escribió un correo esta mañana.", en: "He wrote an email this morning.", verb: { base: "write", past: "wrote", participle: "written", meaning: "escribir" } },
+  { tense: "Present Continuous", es: "Estoy estudiando inglés ahora.", en: "I am studying English now.", verb: { base: "study", past: "studied", participle: "studied", meaning: "estudiar" } },
+  { tense: "Present Continuous", es: "Ella está trabajando en un nuevo proyecto.", en: "She is working on a new project.", verb: { base: "work", past: "worked", participle: "worked", meaning: "trabajar" } },
+  { tense: "Present Continuous", es: "Estamos preparando la presentación.", en: "We are preparing the presentation.", verb: { base: "prepare", past: "prepared", participle: "prepared", meaning: "preparar" } },
+  { tense: "Present Perfect", es: "Ya terminé el informe.", en: "I have finished the report.", verb: { base: "finish", past: "finished", participle: "finished", meaning: "terminar" } },
+  { tense: "Present Perfect", es: "Ella ha trabajado aquí durante tres años.", en: "She has worked here for three years.", verb: { base: "work", past: "worked", participle: "worked", meaning: "trabajar" } },
+  { tense: "Present Perfect", es: "Hemos visto esa película.", en: "We have seen that movie.", verb: { base: "see", past: "saw", participle: "seen", meaning: "ver" } },
+  { tense: "Future Simple", es: "Mañana llamaré al cliente.", en: "I will call the client tomorrow.", verb: { base: "call", past: "called", participle: "called", meaning: "llamar" } },
+  { tense: "Future Simple", es: "Ella enviará el archivo esta tarde.", en: "She will send the file this afternoon.", verb: { base: "send", past: "sent", participle: "sent", meaning: "enviar" } },
+  { tense: "Future Simple", es: "Revisaremos los costos mañana.", en: "We will review the costs tomorrow.", verb: { base: "review", past: "reviewed", participle: "reviewed", meaning: "revisar" } }
 ];
+
+document.querySelectorAll(".tab-button").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".tab-button").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach(section => section.classList.remove("active"));
+    button.classList.add("active");
+    document.getElementById(button.dataset.tab).classList.add("active");
+  });
+});
 
 const els = {
   tenseFilter: document.getElementById("tenseFilter"),
@@ -131,25 +55,17 @@ let total = Number(localStorage.getItem("evt_total") || 0);
 let mistakeList = JSON.parse(localStorage.getItem("evt_mistakes") || "[]");
 
 function normalize(text) {
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/[.,!?;:]/g, "")
-    .replace(/’/g, "'")
-    .replace(/\s+/g, " ");
+  return text.toLowerCase().trim().replace(/[.,!?;:]/g, "").replace(/’/g, "'").replace(/\s+/g, " ");
 }
-
 function getPool() {
   const filter = els.tenseFilter.value;
   return filter === "all" ? questions : questions.filter(q => q.tense === filter);
 }
-
 function pickQuestion() {
   const pool = getPool();
   current = pool[Math.floor(Math.random() * pool.length)];
   renderQuestion();
 }
-
 function renderQuestion() {
   els.tenseBadge.textContent = current.tense;
   els.spanishSentence.textContent = current.es;
@@ -160,40 +76,29 @@ function renderQuestion() {
   els.answer.value = "";
   els.feedback.className = "feedback hidden";
   els.feedback.innerHTML = "";
-  els.answer.focus();
 }
-
 function saveStats() {
   localStorage.setItem("evt_correct", String(correct));
   localStorage.setItem("evt_total", String(total));
   localStorage.setItem("evt_mistakes", JSON.stringify(mistakeList));
 }
-
 function renderStats() {
   els.correctCount.textContent = correct;
   els.totalCount.textContent = total;
   els.accuracy.textContent = total ? Math.round((correct / total) * 100) + "%" : "0%";
-
   if (!mistakeList.length) {
     els.mistakes.innerHTML = '<p class="muted">Todavía no tienes errores guardados.</p>';
     return;
   }
-
   els.mistakes.innerHTML = mistakeList.slice(0, 8).map(m => `
-    <div class="mistake">
-      <div><strong>${m.es}</strong></div>
-      <div>Correcta: ${m.en}</div>
-    </div>
+    <div class="mistake"><div><strong>${m.es}</strong></div><div>Correcta: ${m.en}</div></div>
   `).join("");
 }
-
 function checkAnswer() {
   const user = els.answer.value.trim();
   if (!user) return;
-
   total++;
   const isCorrect = normalize(user) === normalize(current.en);
-
   if (isCorrect) {
     correct++;
     els.feedback.className = "feedback correct";
@@ -201,18 +106,14 @@ function checkAnswer() {
   } else {
     els.feedback.className = "feedback incorrect";
     els.feedback.innerHTML = `❌ Tu respuesta: <strong>${user}</strong><br>✅ Correcta: <strong>${current.en}</strong>`;
-
-    const exists = mistakeList.some(m => m.es === current.es);
-    if (!exists) {
+    if (!mistakeList.some(m => m.es === current.es)) {
       mistakeList.unshift({ es: current.es, en: current.en, tense: current.tense });
       mistakeList = mistakeList.slice(0, 30);
     }
   }
-
   saveStats();
   renderStats();
 }
-
 function speak(text, lang) {
   speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
@@ -220,29 +121,21 @@ function speak(text, lang) {
   utterance.rate = 0.9;
   speechSynthesis.speak(utterance);
 }
-
 function startSpeechRecognition() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
   if (!SpeechRecognition) {
     alert("El reconocimiento de voz no está disponible en este navegador. Prueba Chrome o Edge.");
     return;
   }
-
   const recognition = new SpeechRecognition();
   recognition.lang = "en-US";
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
-
   recognition.onresult = event => {
     els.answer.value = event.results[0][0].transcript;
     checkAnswer();
   };
-
-  recognition.onerror = () => {
-    alert("No pude reconocer la voz. Puedes escribir la respuesta manualmente.");
-  };
-
+  recognition.onerror = () => alert("No pude reconocer la voz. Puedes escribir la respuesta manualmente.");
   recognition.start();
 }
 
@@ -259,7 +152,6 @@ els.listenVerb.addEventListener("click", () => speak(
   "en-US"
 ));
 els.speakAnswer.addEventListener("click", startSpeechRecognition);
-
 els.answer.addEventListener("keydown", e => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
