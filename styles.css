@@ -452,3 +452,123 @@ body { padding-top: 92px; }
   .level-resources p{font-size:.92rem}
   .level-resources a{font-size:.94rem}
 }
+
+/* Fix vocabulary cards on mobile */
+.level-word-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.level-word {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "word audio"
+    "meaning audio"
+    "phonetic audio";
+  align-items: center;
+  gap: 2px 8px;
+  min-width: 0;
+  padding: 12px;
+  background: #172033;
+  border: 1px solid #2b3b52;
+  border-radius: 12px;
+}
+
+.level-word strong {
+  grid-area: word;
+  padding: 0 !important;
+  margin: 0;
+  font-size: .95rem;
+  line-height: 1.2;
+  color: #f8fafc;
+}
+
+.level-word span {
+  grid-area: meaning;
+  margin: 2px 0 0 !important;
+  font-size: .8rem;
+  line-height: 1.25;
+  color: #cbd5e1;
+}
+
+.level-word small {
+  grid-area: phonetic;
+  margin: 2px 0 0 !important;
+  font-size: .76rem;
+  line-height: 1.2;
+  color: #7dd3fc;
+  font-style: italic;
+}
+
+.word-audio {
+  grid-area: audio;
+  position: static !important;
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  min-height: 34px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  display: grid !important;
+  place-items: center !important;
+  background: #38bdf8 !important;
+  color: #082f49 !important;
+  font-size: .9rem !important;
+  line-height: 1 !important;
+  box-shadow: none !important;
+}
+
+.level-words-label {
+  margin-bottom: 10px !important;
+}
+
+@media (max-width: 760px) {
+  .level-word-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .level-word {
+    grid-template-columns: 1fr 38px !important;
+    padding: 11px 12px !important;
+  }
+
+  .level-word strong {
+    font-size: 1rem !important;
+  }
+
+  .level-word span {
+    font-size: .86rem !important;
+  }
+
+  .level-word small {
+    font-size: .8rem !important;
+  }
+
+  .word-audio {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+  }
+
+  .level-words-label {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  .level-words-label strong {
+    font-size: 1rem !important;
+  }
+
+  .level-words-label span {
+    font-size: .72rem !important;
+    text-align: right !important;
+  }
+}
