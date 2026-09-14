@@ -123,3 +123,60 @@ button.success { background: var(--success); color: #052e16; }
   background:#334155;
   color:white;
 }
+
+body { padding-top: 92px; }
+.app { padding-top: 18px; }
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(15,23,42,.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px max(18px, calc((100vw - 1050px)/2));
+}
+.brand { display:flex; flex-direction:column; gap:2px; }
+.brand strong { font-size:1.1rem; white-space:nowrap; }
+.topbar .tabs { margin:0; }
+#practice, #grammar { min-height: calc(100vh - 120px); }
+.grammar-shell { max-width:900px; margin:0 auto; }
+.grammar-header { display:flex; justify-content:space-between; gap:18px; align-items:end; flex-wrap:wrap; }
+.grammar-header h2 { margin:4px 0 0; }
+.grammar-header select { min-width:280px; width:auto; }
+.grammar-tabs {
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:14px 0 6px;
+  scrollbar-width:thin;
+}
+.grammar-tab {
+  flex:0 0 auto;
+  background:#1e293b;
+  color:#cbd5e1;
+  border:1px solid var(--border);
+  padding:9px 12px;
+}
+.grammar-tab.active { background:var(--accent); color:#082f49; }
+.grammar-detail { margin-top:14px; }
+.grammar-detail h3 { font-size:1.55rem; margin:12px 0 8px; }
+.grammar-detail > p { line-height:1.55; color:#dbe5f0; }
+.grammar-two { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px 0; }
+.grammar-two div { background:var(--panel-2); padding:12px; border-radius:12px; }
+.grammar-two p { margin:6px 0 0; color:#cbd5e1; }
+#grammar .example { margin-top:14px; }
+#grammar .keywords { margin-bottom:0; }
+
+@media (max-width: 760px) {
+  body { padding-top: 132px; }
+  .topbar { align-items:flex-start; flex-direction:column; }
+  .topbar .tabs { width:100%; }
+  .tab-button { flex:1; }
+  .grammar-header select { width:100%; min-width:0; }
+  .grammar-two { grid-template-columns:1fr; }
+}
+.grammar-grid,.grammar-intro,.grammar-summary{display:none!important;}
