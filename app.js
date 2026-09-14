@@ -319,12 +319,22 @@ const grammarEls = {
   negative: document.getElementById("grammarNegative"),
   question: document.getElementById("grammarQuestion"),
   example: document.getElementById("grammarExample"),
-  keywords: document.getElementById("grammarKeywords")
+  keywords: document.getElementById("grammarKeywords"),
+  detail: document.querySelector(".grammar-detail"),
+  summary: document.getElementById("grammarSummary")
 };
 
 function showGrammarTense(name) {
+  if (name === "Summary") {
+    grammarEls.select.value = "Summary";
+    grammarEls.detail.classList.add("hidden");
+    grammarEls.summary.classList.remove("hidden");
+    return;
+  }
   const item = grammarData[name];
   if (!item) return;
+  grammarEls.summary.classList.add("hidden");
+  grammarEls.detail.classList.remove("hidden");
   grammarEls.select.value = name;
   grammarEls.badge.textContent = name;
   grammarEls.title.textContent = item.title;
@@ -337,7 +347,7 @@ function showGrammarTense(name) {
 }
 
 grammarEls.select.addEventListener("change", e => showGrammarTense(e.target.value));
-showGrammarTense("Present Simple");
+showGrammarTense("Summary");
 
 renderQuestion();
 renderStats();
