@@ -111,3 +111,15 @@ button.success { background: var(--success); color: #052e16; }
   font-style:italic;
   line-height:1.25;
 }
+
+.answer-pronunciation {
+  margin-top:8px;
+  color:#7dd3fc;
+  font-style:italic;
+  font-size:1rem;
+}
+.feedback-audio {
+  margin-top:10px;
+  background:#334155;
+  color:white;
+}
