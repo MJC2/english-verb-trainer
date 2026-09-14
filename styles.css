@@ -180,3 +180,35 @@ body { padding-top: 92px; }
   .grammar-two { grid-template-columns:1fr; }
 }
 .grammar-grid,.grammar-intro,.grammar-summary{display:none!important;}
+.grammar-summary-view { margin-top:16px; }
+.grammar-summary-view h3 { margin:0 0 6px; font-size:1.45rem; }
+.tense-table-wrap {
+  margin-top:14px;
+  overflow:auto;
+  border:1px solid var(--border);
+  border-radius:14px;
+  max-height:58vh;
+}
+.tense-table {
+  width:100%;
+  border-collapse:collapse;
+  min-width:760px;
+  font-size:.9rem;
+}
+.tense-table th {
+  position:sticky;
+  top:0;
+  background:#172033;
+  color:#bae6fd;
+  text-align:left;
+  padding:11px 12px;
+  border-bottom:1px solid var(--border);
+}
+.tense-table td {
+  padding:10px 12px;
+  border-bottom:1px solid #253247;
+  vertical-align:top;
+  color:#dbe5f0;
+}
+.tense-table tr:last-child td { border-bottom:0; }
+.tense-table tbody tr:nth-child(even) { background:rgba(31,41,55,.45); }
