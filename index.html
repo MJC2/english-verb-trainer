@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>English Verb Trainer</title>
-  <link rel="stylesheet" href="styles.css?v=20260913-18" />
+  <link rel="stylesheet" href="styles.css?v=20260913-19" />
 </head>
 <body>
   <main class="app">
@@ -15,9 +15,9 @@
       </div>
       <nav class="tabs" aria-label="Secciones principales">
         <button class="tab-button active" data-tab="training">🎓 Mi entrenamiento</button>
+        <button class="tab-button" data-tab="weekly-test">📝 Evaluación semanal</button>
         <button class="tab-button" data-tab="practice">🎯 Practicar</button>
         <button class="tab-button" data-tab="grammar">📘 Gramática y tiempos</button>
-        <button class="tab-button" data-tab="weekly-test">📝 Evaluación semanal</button>
         <button class="tab-button" data-tab="prepositions">🧭 Preposiciones</button>
       </nav>
     </header>
@@ -158,6 +158,19 @@
           <div><span>Esta semana</span><strong id="weekStatus">⏳ Aún no practicas</strong></div>
           <div><span>Racha semanal</span><strong id="weekStreak">0 semanas</strong></div>
           <div><span>Última práctica</span><strong id="lastPractice">—</strong></div>
+        </div>
+
+        <div class="home-b2-card">
+          <div class="home-b2-top">
+            <div>
+              <span class="eyebrow">Meta profesional</span>
+              <h3>B2 aplicado a FinOps · 31 agosto 2027</h3>
+            </div>
+            <strong id="homeB2Progress">0%</strong>
+          </div>
+          <div class="b2-progressbar"><span id="homeB2ProgressFill"></span></div>
+          <p id="homeB2Note">La Evaluación semanal actualiza este avance.</p>
+          <button type="button" class="secondary" id="goWeeklyTest">📝 Ir a Evaluación semanal</button>
         </div>
         <h3>Rutina diaria · 15 minutos</h3>
         <div class="study-grid">
@@ -426,6 +439,6 @@
     </section>
   </main>
 
-  <script src="app.js?v=20260913-18"></script>
+  <script src="app.js?v=20260913-19"></script>
 </body>
 </html>
