@@ -535,12 +535,24 @@ const B2_START=new Date("2026-09-13T00:00:00"), B2_END=new Date("2027-08-31T23:5
 function totalB2Weeks(){return Math.max(1,Math.ceil((B2_END-B2_START)/(7*86400000)));}
 function renderB2Progress(){
  const pctEl=document.getElementById("b2Progress"),fill=document.getElementById("b2ProgressFill"),note=document.getElementById("b2Note");
- if(!pctEl) return;
+ const homePct=document.getElementById("homeB2Progress"),homeFill=document.getElementById("homeB2ProgressFill"),homeNote=document.getElementById("homeB2Note");
  const keys=Object.keys(localStorage).filter(k=>k.startsWith("evt_test_"));
  let approved=0;
  keys.forEach(k=>{try{const x=JSON.parse(localStorage.getItem(k));if(x&&x.pct>=80)approved++;}catch(e){}});
  const total=totalB2Weeks(), pct=Math.min(100,Math.round(approved/total*100));
- pctEl.textContent=pct+"%"; if(fill) fill.style.width=pct+"%";
+ if(pctEl) pctEl.textContent=pct+"%";
+ if(fill) fill.style.width=pct+"%";
  if(note) note.textContent=approved+" de "+total+" hitos semanales aprobados · Cada evaluación con ≥80% cuenta como 1 hito.";
+ if(homePct) homePct.textContent=pct+"%";
+ if(homeFill) homeFill.style.width=pct+"%";
+ if(homeNote) homeNote.textContent=approved+" de "+total+" evaluaciones semanales aprobadas (≥80%).";
 }
 renderB2Progress();
+
+document.getElementById("goWeeklyTest")?.addEventListener("click",()=>{
+  document.querySelectorAll(".tab-button").forEach(b=>b.classList.remove("active"));
+  document.querySelectorAll(".tab-content").forEach(s=>s.classList.remove("active"));
+  document.querySelector('[data-tab="weekly-test"]')?.classList.add("active");
+  document.getElementById("weekly-test")?.classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+});
