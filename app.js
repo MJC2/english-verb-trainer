@@ -147,10 +147,10 @@ function checkAnswer() {
   if (isCorrect) {
     correct++;
     els.feedback.className = "feedback correct";
-    els.feedback.innerHTML = `✅ Correcto.<br><strong>${current.en}</strong><div class="answer-pronunciation">🗣️ ${current.enPh}</div><button class="feedback-audio" data-action="play-correct">🔊 Escuchar frase correcta</button>`;
+    els.feedback.innerHTML = `✅ Correcto.<br><strong>${current.en}</strong><div class="answer-pronunciation">🗣️ ${current.enPh}</div><button class="feedback-audio" data-action="play-correct">🔊 Escuchar frase correcta</button><button class="ask-chatgpt" data-action="ask-chatgpt">💬 ¿Por qué está mal? Preguntar a ChatGPT</button>`;
   } else {
     els.feedback.className = "feedback incorrect";
-    els.feedback.innerHTML = `❌ Tu respuesta: <strong>${user}</strong><br>✅ Correcta: <strong>${current.en}</strong><div class="answer-pronunciation">🗣️ ${current.enPh}</div><button class="feedback-audio" data-action="play-correct">🔊 Escuchar frase correcta</button>`;
+    els.feedback.innerHTML = `❌ Tu respuesta: <strong>${user}</strong><br>✅ Correcta: <strong>${current.en}</strong><div class="answer-pronunciation">🗣️ ${current.enPh}</div><button class="feedback-audio" data-action="play-correct">🔊 Escuchar frase correcta</button><button class="ask-chatgpt" data-action="ask-chatgpt">💬 ¿Por qué está mal? Preguntar a ChatGPT</button>`;
     if (!mistakeList.some(m => m.es === current.es)) {
       mistakeList.unshift({ es: current.es, en: current.en, tense: current.tense });
       mistakeList = mistakeList.slice(0, 30);
@@ -218,8 +218,14 @@ els.listenVerb.addEventListener("click", () => speak(
 els.speakAnswer.addEventListener("click", startSpeechRecognition);
 els.listenCorrect.addEventListener("click", () => speak(current.en, "en-US"));
 els.feedback.addEventListener("click", (e) => {
-  const button = e.target.closest('[data-action="play-correct"]');
-  if (button) speak(current.en, "en-US");
+  const audio = e.target.closest('[data-action="play-correct"]');
+  if (audio) speak(current.en, "en-US");
+  const ask = e.target.closest('[data-action="ask-chatgpt"]');
+  if (ask) {
+    const userAnswer = els.answer.value.trim();
+    const prompt = "Estoy estudiando inglés laboral aplicado a FinOps.\n\nFrase en español: "+current.es+"\nMi respuesta: "+userAnswer+"\nRespuesta correcta: "+current.en+"\nTiempo verbal: "+current.tense+"\n\nExplícame en español, de forma breve y sencilla, POR QUÉ mi respuesta está mal. Identifica la regla gramatical o de preposición que debo aprender. Por ejemplo, si corresponde una estructura como 'before + verbo-ing', explícame esa regla y dame 2 ejemplos FinOps parecidos. No me des una explicación larga.";
+    window.open("https://chatgpt.com/?q="+encodeURIComponent(prompt),"_blank","noopener");
+  }
 });
 els.answer.addEventListener("keydown", e => {
   if (e.key === "Enter" && !e.shiftKey) {
