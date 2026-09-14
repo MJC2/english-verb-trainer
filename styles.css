@@ -627,3 +627,17 @@ body { padding-top: 92px; }
     padding: 9px !important;
   }
 }
+
+/* Tiny inline speaker icon for vocabulary */
+.level-word{grid-template-columns:1fr 22px!important}
+.word-audio{
+  width:20px!important;height:20px!important;min-width:20px!important;min-height:20px!important;
+  max-width:20px!important;max-height:20px!important;padding:0!important;margin:0!important;
+  border:0!important;border-radius:4px!important;background:transparent!important;color:#7dd3fc!important;
+  font-size:12px!important;line-height:20px!important;display:inline-grid!important;place-items:center!important;
+  box-shadow:none!important;transform:none!important;
+}
+@media(max-width:760px){
+ .level-word{grid-template-columns:1fr 22px!important;min-height:70px!important;padding:9px 10px!important}
+ .word-audio{width:20px!important;height:20px!important;min-width:20px!important;min-height:20px!important;max-width:20px!important;max-height:20px!important;font-size:12px!important;line-height:20px!important}
+}
