@@ -1,21 +1,21 @@
 const questions = [
-  { tense: "Present Simple", es: "Ella dice eso todos los días.", en: "She says that every day.", verb: { base: "say", past: "said", participle: "said", meaning: "decir" } },
-  { tense: "Present Simple", es: "Yo trabajo desde casa los viernes.", en: "I work from home on Fridays.", verb: { base: "work", past: "worked", participle: "worked", meaning: "trabajar" } },
-  { tense: "Present Simple", es: "Él estudia inglés por la noche.", en: "He studies English at night.", verb: { base: "study", past: "studied", participle: "studied", meaning: "estudiar" } },
-  { tense: "Present Simple", es: "Nosotros usamos esta herramienta todos los días.", en: "We use this tool every day.", verb: { base: "use", past: "used", participle: "used", meaning: "usar" } },
-  { tense: "Past Simple", es: "Ayer terminé el informe.", en: "I finished the report yesterday.", verb: { base: "finish", past: "finished", participle: "finished", meaning: "terminar" } },
-  { tense: "Past Simple", es: "Ella fue a la oficina ayer.", en: "She went to the office yesterday.", verb: { base: "go", past: "went", participle: "gone", meaning: "ir" } },
-  { tense: "Past Simple", es: "Compramos comida después del trabajo.", en: "We bought food after work.", verb: { base: "buy", past: "bought", participle: "bought", meaning: "comprar" } },
-  { tense: "Past Simple", es: "Él escribió un correo esta mañana.", en: "He wrote an email this morning.", verb: { base: "write", past: "wrote", participle: "written", meaning: "escribir" } },
-  { tense: "Present Continuous", es: "Estoy estudiando inglés ahora.", en: "I am studying English now.", verb: { base: "study", past: "studied", participle: "studied", meaning: "estudiar" } },
-  { tense: "Present Continuous", es: "Ella está trabajando en un nuevo proyecto.", en: "She is working on a new project.", verb: { base: "work", past: "worked", participle: "worked", meaning: "trabajar" } },
-  { tense: "Present Continuous", es: "Estamos preparando la presentación.", en: "We are preparing the presentation.", verb: { base: "prepare", past: "prepared", participle: "prepared", meaning: "preparar" } },
-  { tense: "Present Perfect", es: "Ya terminé el informe.", en: "I have finished the report.", verb: { base: "finish", past: "finished", participle: "finished", meaning: "terminar" } },
-  { tense: "Present Perfect", es: "Ella ha trabajado aquí durante tres años.", en: "She has worked here for three years.", verb: { base: "work", past: "worked", participle: "worked", meaning: "trabajar" } },
-  { tense: "Present Perfect", es: "Hemos visto esa película.", en: "We have seen that movie.", verb: { base: "see", past: "saw", participle: "seen", meaning: "ver" } },
-  { tense: "Future Simple", es: "Mañana llamaré al cliente.", en: "I will call the client tomorrow.", verb: { base: "call", past: "called", participle: "called", meaning: "llamar" } },
-  { tense: "Future Simple", es: "Ella enviará el archivo esta tarde.", en: "She will send the file this afternoon.", verb: { base: "send", past: "sent", participle: "sent", meaning: "enviar" } },
-  { tense: "Future Simple", es: "Revisaremos los costos mañana.", en: "We will review the costs tomorrow.", verb: { base: "review", past: "reviewed", participle: "reviewed", meaning: "revisar" } }
+  { tense: "Present Simple", es: "Ella dice eso todos los días.", en: "She says that every day.", verb: { base: "say", past: "said", participle: "said", meaning: "decir", basePh: "seí", pastPh: "sed", participlePh: "sed" } },
+  { tense: "Present Simple", es: "Yo trabajo desde casa los viernes.", en: "I work from home on Fridays.", verb: { base: "work", past: "worked", participle: "worked", meaning: "trabajar", basePh: "uérk", pastPh: "uérkt", participlePh: "uérkt" } },
+  { tense: "Present Simple", es: "Él estudia inglés por la noche.", en: "He studies English at night.", verb: { base: "study", past: "studied", participle: "studied", meaning: "estudiar", basePh: "stádi", pastPh: "stádid", participlePh: "stádid" } },
+  { tense: "Present Simple", es: "Nosotros usamos esta herramienta todos los días.", en: "We use this tool every day.", verb: { base: "use", past: "used", participle: "used", meaning: "usar", basePh: "iúz", pastPh: "iúzd", participlePh: "iúzd" } },
+  { tense: "Past Simple", es: "Ayer terminé el informe.", en: "I finished the report yesterday.", verb: { base: "finish", past: "finished", participle: "finished", meaning: "terminar", basePh: "fínish", pastPh: "fínisht", participlePh: "fínisht" } },
+  { tense: "Past Simple", es: "Ella fue a la oficina ayer.", en: "She went to the office yesterday.", verb: { base: "go", past: "went", participle: "gone", meaning: "ir", basePh: "góu", pastPh: "uent", participlePh: "gon" } },
+  { tense: "Past Simple", es: "Compramos comida después del trabajo.", en: "We bought food after work.", verb: { base: "buy", past: "bought", participle: "bought", meaning: "comprar", basePh: "bái", pastPh: "bot", participlePh: "bot" } },
+  { tense: "Past Simple", es: "Él escribió un correo esta mañana.", en: "He wrote an email this morning.", verb: { base: "write", past: "wrote", participle: "written", meaning: "escribir", basePh: "ráit", pastPh: "róut", participlePh: "ríten" } },
+  { tense: "Present Continuous", es: "Estoy estudiando inglés ahora.", en: "I am studying English now.", verb: { base: "study", past: "studied", participle: "studied", meaning: "estudiar", basePh: "stádi", pastPh: "stádid", participlePh: "stádid" } },
+  { tense: "Present Continuous", es: "Ella está trabajando en un nuevo proyecto.", en: "She is working on a new project.", verb: { base: "work", past: "worked", participle: "worked", meaning: "trabajar", basePh: "uérk", pastPh: "uérkt", participlePh: "uérkt" } },
+  { tense: "Present Continuous", es: "Estamos preparando la presentación.", en: "We are preparing the presentation.", verb: { base: "prepare", past: "prepared", participle: "prepared", meaning: "preparar", basePh: "pripér", pastPh: "pripérd", participlePh: "pripérd" } },
+  { tense: "Present Perfect", es: "Ya terminé el informe.", en: "I have finished the report.", verb: { base: "finish", past: "finished", participle: "finished", meaning: "terminar", basePh: "fínish", pastPh: "fínisht", participlePh: "fínisht" } },
+  { tense: "Present Perfect", es: "Ella ha trabajado aquí durante tres años.", en: "She has worked here for three years.", verb: { base: "work", past: "worked", participle: "worked", meaning: "trabajar", basePh: "uérk", pastPh: "uérkt", participlePh: "uérkt" } },
+  { tense: "Present Perfect", es: "Hemos visto esa película.", en: "We have seen that movie.", verb: { base: "see", past: "saw", participle: "seen", meaning: "ver", basePh: "sí", pastPh: "só", participlePh: "sín" } },
+  { tense: "Future Simple", es: "Mañana llamaré al cliente.", en: "I will call the client tomorrow.", verb: { base: "call", past: "called", participle: "called", meaning: "llamar", basePh: "kol", pastPh: "kold", participlePh: "kold" } },
+  { tense: "Future Simple", es: "Ella enviará el archivo esta tarde.", en: "She will send the file this afternoon.", verb: { base: "send", past: "sent", participle: "sent", meaning: "enviar", basePh: "send", pastPh: "sent", participlePh: "sent" } },
+  { tense: "Future Simple", es: "Revisaremos los costos mañana.", en: "We will review the costs tomorrow.", verb: { base: "review", past: "reviewed", participle: "reviewed", meaning: "revisar", basePh: "riviú", pastPh: "riviúd", participlePh: "riviúd" } }
 ];
 
 document.querySelectorAll(".tab-button").forEach(button => {
@@ -36,6 +36,10 @@ const els = {
   verbPast: document.getElementById("verbPast"),
   verbParticiple: document.getElementById("verbParticiple"),
   verbMeaning: document.getElementById("verbMeaning"),
+  verbBasePh: document.getElementById("verbBasePh"),
+  verbPastPh: document.getElementById("verbPastPh"),
+  verbParticiplePh: document.getElementById("verbParticiplePh"),
+  listenCorrect: document.getElementById("listenCorrect"),
   answer: document.getElementById("answer"),
   checkAnswer: document.getElementById("checkAnswer"),
   speakAnswer: document.getElementById("speakAnswer"),
@@ -73,6 +77,9 @@ function renderQuestion() {
   els.verbPast.textContent = current.verb.past;
   els.verbParticiple.textContent = current.verb.participle;
   els.verbMeaning.textContent = current.verb.meaning;
+  els.verbBasePh.textContent = current.verb.basePh;
+  els.verbPastPh.textContent = current.verb.pastPh;
+  els.verbParticiplePh.textContent = current.verb.participlePh;
   els.answer.value = "";
   els.feedback.className = "feedback hidden";
   els.feedback.innerHTML = "";
@@ -152,6 +159,7 @@ els.listenVerb.addEventListener("click", () => speak(
   "en-US"
 ));
 els.speakAnswer.addEventListener("click", startSpeechRecognition);
+els.listenCorrect.addEventListener("click", () => speak(current.en, "en-US"));
 els.answer.addEventListener("keydown", e => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
