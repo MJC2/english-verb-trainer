@@ -358,5 +358,37 @@ function showGrammarTense(name) {
 grammarEls.select.addEventListener("change", e => showGrammarTense(e.target.value));
 showGrammarTense("Summary");
 
+
+const prepQuestions = [
+ {category:"Lugar",prep:"in",meaning:"en / dentro de",es:"Monitoreamos los costos en AWS y Azure todos los días.",en:"We track costs in AWS and Azure every day.",ph:"uí trak kosts in ei-dábol-iu-es and áshur évri déi."},
+ {category:"Lugar",prep:"on",meaning:"en / sobre",es:"El informe está en el panel.",en:"The report is on the dashboard.",ph:"de ripórt iz on de dáshbord."},
+ {category:"Lugar",prep:"at",meaning:"en un punto específico",es:"Nos reunimos en la oficina.",en:"We meet at the office.",ph:"uí mít at di ófis."},
+ {category:"Lugar",prep:"between",meaning:"entre dos",es:"El costo está entre cinco mil y diez mil dólares.",en:"The cost is between five thousand and ten thousand dollars.",ph:"de kost iz bituín fáiv záusand and ten záusand dálars."},
+ {category:"Lugar",prep:"among",meaning:"entre un grupo",es:"FinOps trabaja entre diferentes equipos.",en:"FinOps works among different teams.",ph:"fínops uérks amáng díferent tíms."},
+ {category:"Tiempo",prep:"at",meaning:"a una hora específica",es:"Revisamos los costos a las nueve de la mañana.",en:"We review costs at 9 a.m.",ph:"uí riviú kosts at náin ei em."},
+ {category:"Tiempo",prep:"on",meaning:"en un día o fecha",es:"El equipo se reúne el viernes.",en:"The team meets on Friday.",ph:"de tím míts on fráidei."},
+ {category:"Tiempo",prep:"in",meaning:"en un mes, año o período",es:"Preparamos el presupuesto en septiembre.",en:"We prepare the budget in September.",ph:"uí pripér de bádyet in septémber."},
+ {category:"Tiempo",prep:"between",meaning:"entre dos momentos",es:"El costo está entre cinco mil y diez mil dólares.",en:"The cost is between five thousand and ten thousand dollars.",ph:"de kost iz bituín fáiv záusand and ten záusand dálars."},
+ {category:"Tiempo",prep:"by",meaning:"antes de un límite",es:"El informe debe estar listo para el viernes.",en:"The report is due by Friday.",ph:"de ripórt iz dú bai fráidei."},
+ {category:"Movimiento",prep:"to",meaning:"hacia un destino",es:"Caminamos a la oficina.",en:"We walk to the office.",ph:"uí uók tu di ófis."},
+ {category:"Movimiento",prep:"into",meaning:"desde afuera hacia adentro",es:"Los datos se transfieren al sistema cloud.",en:"The data is transferred into the cloud system.",ph:"de déita iz transférd íntu de cláud sístem."},
+ {category:"Movimiento",prep:"from",meaning:"desde / origen",es:"El informe viene del equipo de finanzas.",en:"The report comes from the finance team.",ph:"de ripórt kams from de fáinans tím."},
+ {category:"Movimiento",prep:"towards",meaning:"hacia / en dirección a",es:"Trabajamos hacia una mejor eficiencia.",en:"We work towards better efficiency.",ph:"uí uérk tuórds béter efíshensi."},
+ {category:"Movimiento",prep:"through",meaning:"a través de",es:"Revisamos los costos a través de dashboards.",en:"We review costs through dashboards.",ph:"uí riviú kosts zrú dáshbords."}
+];
+const pe={select:document.getElementById("prepSelect"),practice:document.getElementById("prepPractice"),summary:document.getElementById("prepSummary"),category:document.getElementById("prepCategory"),spanish:document.getElementById("prepSpanish"),word:document.getElementById("prepWord"),meaning:document.getElementById("prepMeaning"),answer:document.getElementById("prepAnswer"),feedback:document.getElementById("prepFeedback")};
+let pc=prepQuestions[0];
+function renderPrep(){pe.category.textContent=pc.category;pe.spanish.textContent=pc.es;pe.word.textContent=pc.prep;pe.meaning.textContent=pc.meaning;pe.answer.value="";pe.feedback.className="feedback hidden";pe.feedback.innerHTML="";}
+function nextPrep(){pc=prepQuestions[Math.floor(Math.random()*prepQuestions.length)];renderPrep();}
+function prepResult(ok,user=""){pe.feedback.className="feedback "+(ok?"correct":"incorrect");pe.feedback.innerHTML=(ok?"✅ Correcto.":user?`❌ Tu respuesta: <strong>${user}</strong><br>✅ Correcta:`:"✅ Respuesta correcta:")+ ` <strong>${pc.en}</strong><div class="answer-pronunciation">🗣️ ${pc.ph}</div><button class="feedback-audio" data-prep-audio>🔊 Escuchar frase correcta</button>`;}
+document.getElementById("prepCheck").onclick=()=>{const u=pe.answer.value.trim();if(u)prepResult(normalize(u)===normalize(pc.en),u)};
+document.getElementById("prepShow").onclick=()=>prepResult(false);
+document.getElementById("prepListen").onclick=()=>speak(pc.en,"en-US");
+document.getElementById("prepNext").onclick=nextPrep;
+document.getElementById("prepSpeak").onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return alert("Prueba Chrome o Edge para responder hablando.");const r=new SR();r.lang="en-US";r.onresult=e=>{pe.answer.value=e.results[0][0].transcript;document.getElementById("prepCheck").click();};r.start();};
+pe.feedback.onclick=e=>{if(e.target.closest("[data-prep-audio]"))speak(pc.en,"en-US");};
+pe.select.onchange=()=>{const summary=pe.select.value==="summary";pe.practice.classList.toggle("hidden",summary);pe.summary.classList.toggle("hidden",!summary);};
+renderPrep();
+
 renderQuestion();
 renderStats();
