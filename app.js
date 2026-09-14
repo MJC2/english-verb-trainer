@@ -334,21 +334,9 @@ function showGrammarTense(name) {
   grammarEls.question.textContent = item.question;
   grammarEls.example.innerHTML = item.example;
   grammarEls.keywords.textContent = item.keywords;
-  document.querySelectorAll(".grammar-tab").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.tense === name);
-  });
 }
 
 grammarEls.select.addEventListener("change", e => showGrammarTense(e.target.value));
-document.getElementById("grammarTabs").addEventListener("click", e => {
-  const btn = e.target.closest(".grammar-tab");
-  if (!btn) return;
-  if (btn.dataset.tense === "more") {
-    grammarEls.select.focus();
-    return;
-  }
-  showGrammarTense(btn.dataset.tense);
-});
 showGrammarTense("Present Simple");
 
 renderQuestion();
