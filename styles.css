@@ -212,3 +212,8 @@ body { padding-top: 92px; }
 }
 .tense-table tr:last-child td { border-bottom:0; }
 .tense-table tbody tr:nth-child(even) { background:rgba(31,41,55,.45); }
+
+#practice,#grammar,#prepositions{min-height:calc(100vh - 120px)}
+.prep-inner{margin-top:16px;margin-bottom:0}
+.prep-hint{margin-top:18px;background:var(--panel-2);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:4px}
+.prep-hint span{color:var(--muted);font-size:.8rem}.prep-hint strong{font-size:1.4rem;color:#7dd3fc}.prep-hint small{color:#cbd5e1}
