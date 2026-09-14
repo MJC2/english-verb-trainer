@@ -717,3 +717,7 @@ body { padding-top: 92px; }
  }
  .tab-button:last-child{grid-column:1/-1!important}
 }
+
+.ask-chatgpt{display:block;margin-top:10px!important;background:#172033!important;border:1px solid #4b617c!important;color:#e0f2fe!important;font-size:.9rem!important;padding:10px 13px!important;border-radius:10px!important}
+.ask-chatgpt:hover{border-color:#7dd3fc!important}
+@media(max-width:760px){.feedback-audio,.ask-chatgpt{width:100%!important}.ask-chatgpt{font-size:.84rem!important;padding:9px 10px!important}}
