@@ -159,6 +159,7 @@ function checkAnswer() {
   saveStats();
   renderStats();
   markWeeklyPractice();
+  saveStudiedSentence(current);
 }
 let availableVoices = [];
 function refreshVoices() {
@@ -472,3 +473,59 @@ function renderWeeklyProgress(){
   }
 }
 renderWeeklyProgress();
+
+function saveStudiedSentence(q){
+  if(!q || !q.en) return;
+  const week=getISOWeekKey(new Date());
+  const key="evt_studied_"+week;
+  let items=JSON.parse(localStorage.getItem(key)||"[]");
+  if(!items.some(x=>x.en===q.en)){
+    items.push({es:q.es,en:q.en,tense:q.tense});
+    localStorage.setItem(key,JSON.stringify(items));
+  }
+  prepareWeeklyTest();
+}
+let weeklyTest=[], testIndex=0, testCorrect=0, testLocked=false;
+function normalizeTest(s){return (s||"").toLowerCase().trim().replace(/[.,!?]/g,"").replace(/\s+/g," ");}
+function prepareWeeklyTest(){
+  const empty=document.getElementById("testEmpty"), area=document.getElementById("testArea"), result=document.getElementById("testResult");
+  if(!empty||!area) return;
+  const items=JSON.parse(localStorage.getItem("evt_studied_"+getISOWeekKey(new Date()))||"[]");
+  if(!items.length){empty.classList.remove("hidden");area.classList.add("hidden");return;}
+  empty.classList.add("hidden"); result.classList.add("hidden"); area.classList.remove("hidden");
+  weeklyTest=items.slice(-5); testIndex=0; testCorrect=0; showTestQuestion();
+}
+function showTestQuestion(){
+  const q=weeklyTest[testIndex]; if(!q) return;
+  testLocked=false;
+  document.getElementById("testCounter").textContent=(testIndex+1)+" / "+weeklyTest.length;
+  document.getElementById("testScoreLive").textContent="Correctas: "+testCorrect;
+  document.getElementById("testTense").textContent=q.tense;
+  document.getElementById("testSpanish").textContent=q.es;
+  document.getElementById("testAnswer").value="";
+  document.getElementById("testFeedback").innerHTML="";
+  document.getElementById("testNext").classList.add("hidden");
+  document.getElementById("testCheck").classList.remove("hidden");
+}
+function checkWeeklyTest(){
+  if(testLocked) return; testLocked=true;
+  const q=weeklyTest[testIndex], user=document.getElementById("testAnswer").value;
+  const ok=normalizeTest(user)===normalizeTest(q.en);
+  if(ok) testCorrect++;
+  document.getElementById("testFeedback").innerHTML=ok?"✅ Correcto":"❌ Correcta: <strong>"+q.en+"</strong>";
+  document.getElementById("testCheck").classList.add("hidden");
+  document.getElementById("testNext").classList.remove("hidden");
+}
+function nextWeeklyTest(){
+  testIndex++;
+  if(testIndex<weeklyTest.length){showTestQuestion();return;}
+  const pct=Math.round(testCorrect/weeklyTest.length*100);
+  document.getElementById("testArea").classList.add("hidden");
+  const result=document.getElementById("testResult"); result.classList.remove("hidden");
+  result.innerHTML="<h3>"+(pct>=80?"✅ Evaluación aprobada":"📚 Necesita refuerzo")+"</h3><p><strong>"+testCorrect+"/"+weeklyTest.length+" correctas · "+pct+"%</strong></p><p>Meta recomendada: 80% o más.</p>";
+  localStorage.setItem("evt_test_"+getISOWeekKey(new Date()),JSON.stringify({correct:testCorrect,total:weeklyTest.length,pct,date:new Date().toISOString()}));
+}
+document.getElementById("testCheck")?.addEventListener("click",checkWeeklyTest);
+document.getElementById("testNext")?.addEventListener("click",nextWeeklyTest);
+document.getElementById("testAnswer")?.addEventListener("keydown",e=>{if(e.key==="Enter"&&!testLocked)checkWeeklyTest();});
+prepareWeeklyTest();
