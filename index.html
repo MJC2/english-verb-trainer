@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>English Verb Trainer</title>
-  <link rel="stylesheet" href="styles.css?v=20260914-01" />
+  <link rel="stylesheet" href="styles.css?v=20260927-01" />
 </head>
 <body>
   <main class="app">
@@ -14,6 +14,7 @@
         <strong>English Verb Trainer</strong>
       </div>
       <nav class="tabs" aria-label="Secciones principales">
+        <button class="tab-button" data-tab="start">🗓️ Cómo empezar</button>
         <button class="tab-button active" data-tab="training">🎓 Mi entrenamiento</button>
         <button class="tab-button" data-tab="weekly-test">📝 Evaluación semanal</button>
         <button class="tab-button" data-tab="practice">🎯 Practicar</button>
@@ -21,6 +22,26 @@
         <button class="tab-button" data-tab="prepositions">🧭 Preposiciones</button>
       </nav>
     </header>
+
+    <section id="start" class="tab-content">
+      <section class="panel grammar-shell">
+        <p class="eyebrow">Tu ruta de estudio · desde el 27 de septiembre de 2026</p>
+        <h2>🗓️ Cómo empezar</h2>
+        <p>Una semana, un verbo FinOps y una misma idea en distintos tiempos. Primero aprende el significado; después compara cómo cambia el verbo. No necesitas memorizar todas las frases de una vez.</p>
+        <div class="start-current" id="startCurrent" aria-live="polite"></div>
+        <h3>Tu calendario de verbos</h3>
+        <div class="start-plan" id="startPlan"></div>
+        <h3>Cómo estudiar cada semana</h3>
+        <ol class="start-steps">
+          <li><strong>10 minutos:</strong> aprende el verbo, su significado y pronunciación.</li>
+          <li><strong>15 minutos:</strong> compara la misma frase en los tres tiempos indicados.</li>
+          <li><strong>25 minutos:</strong> intenta construir las frases sin mirar la respuesta; comprueba y repite.</li>
+          <li><strong>10 minutos:</strong> di en voz alta una frase propia sobre tu trabajo.</li>
+        </ol>
+        <p>El viernes, entra a <strong>Evaluación semanal</strong> para comprobar lo que practicaste. La evaluación actual registra frases practicadas en la pestaña «Practicar»; esta nueva ruta es una guía de estudio y no cambia automáticamente las preguntas del examen.</p>
+        <button type="button" class="secondary" id="startGoPractice">🎯 Ir a Practicar</button>
+      </section>
+    </section>
 
     <section id="practice" class="tab-content">
       <section class="panel controls">
@@ -439,6 +460,6 @@
     </section>
   </main>
 
-  <script src="app.js?v=20260914-01"></script>
+  <script src="app.js?v=20260927-01"></script>
 </body>
 </html>
