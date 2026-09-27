@@ -579,9 +579,9 @@ function startPlanDate(iso){return new Date(iso+"T12:00:00").toLocaleDateString(
 function startPlanExamples(item){
  const base=item.verb+" "+item.object;
  return [
-  ["Present Simple","I "+base+".","Yo "+item.meaning+" "+item.objectEs+"."],
+  ["Present Simple","I "+base+".","Yo "+({review:"reviso",identify:"identifico",reduce:"reduzco",investigate:"investigo",allocate:"asigno",optimize:"optimizo",forecast:"proyecto",negotiate:"negocio"}[item.verb])+" "+item.objectEs+"."],
   ["Present Continuous","I am "+item.verb.replace(/e$/,"")+"ing "+item.object+".","Estoy "+({review:"revisando",identify:"identificando",reduce:"reduciendo",investigate:"investigando",allocate:"asignando",optimize:"optimizando",forecast:"proyectando",negotiate:"negociando"}[item.verb])+" "+item.objectEs+"."],
-  ["Past Simple","I "+item.past+" "+item.object+".","Yo "+item.past+" "+item.objectEs+"."]
+  ["Past Simple","I "+item.past+" "+item.object+".","Yo "+({review:"revisé",identify:"identifiqué",reduce:"reduje",investigate:"investigué",allocate:"asigné",optimize:"optimicé",forecast:"proyecté",negotiate:"negocié"}[item.verb])+" "+item.objectEs+"."]
  ];
 }
 function renderStartPlan(){
