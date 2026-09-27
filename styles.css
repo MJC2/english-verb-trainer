@@ -721,3 +721,21 @@ body { padding-top: 92px; }
 .ask-chatgpt{display:block;margin-top:10px!important;background:#172033!important;border:1px solid #4b617c!important;color:#e0f2fe!important;font-size:.9rem!important;padding:10px 13px!important;border-radius:10px!important}
 .ask-chatgpt:hover{border-color:#7dd3fc!important}
 @media(max-width:760px){.feedback-audio,.ask-chatgpt{width:100%!important}.ask-chatgpt{font-size:.84rem!important;padding:9px 10px!important}}
+
+
+/* Cómo empezar: guía compacta y legible en móvil */
+.start-current{background:#123047;border:1px solid #367ba0;border-radius:14px;padding:16px;margin:18px 0}
+.start-current strong{color:#7dd3fc;font-size:1.08rem}.start-current p{margin:8px 0 0}
+.start-plan{display:grid;gap:10px;margin:12px 0 22px}
+.start-week{border:1px solid var(--border);border-radius:12px;background:#172338;overflow:hidden}
+.start-week summary{cursor:pointer;display:flex;flex-wrap:wrap;align-items:center;gap:7px 14px;padding:14px;list-style:none}
+.start-week summary::-webkit-details-marker{display:none}
+.start-week summary>span:first-child{color:#cbd5e1;font-size:.86rem}
+.start-week summary strong{color:#f8fafc}
+.start-now{margin-left:auto;color:#082f49;background:#7dd3fc;border-radius:20px;padding:3px 9px;font-size:.75rem;font-weight:700}
+.start-week-body{padding:0 14px 15px}
+.start-example-list{display:grid;gap:8px}
+.start-example-list>div{background:#0f172a;border-radius:9px;padding:11px;display:grid;gap:4px}
+.start-example-list small{color:#7dd3fc}.start-example-list strong{font-size:1rem}.start-example-list span{color:#cbd5e1;font-size:.9rem}
+.start-note{color:#cbd5e1;font-size:.9rem}.start-steps{padding-left:23px;line-height:1.7}
+@media(max-width:760px){.start-week summary{gap:5px 9px}.start-now{margin-left:0}.start-current{padding:12px}}
