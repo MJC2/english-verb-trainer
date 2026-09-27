@@ -562,3 +562,45 @@ document.getElementById("goWeeklyTest")?.addEventListener("click",()=>{
   document.getElementById("weekly-test")?.classList.add("active");
   window.scrollTo({top:0,behavior:"smooth"});
 });
+
+
+/* Ruta de estudio: una idea FinOps por verbo, con tiempos comparables. */
+const startVerbPlan=[
+ {date:"2026-09-27",verb:"review",meaning:"revisar",pron:"ri-viú",object:"cloud costs",objectEs:"los costos de la nube",past:"reviewed",participle:"reviewed"},
+ {date:"2026-10-04",verb:"identify",meaning:"identificar",pron:"ai-dén-ti-fai",object:"cost anomalies",objectEs:"las anomalías de costos",past:"identified",participle:"identified"},
+ {date:"2026-10-11",verb:"reduce",meaning:"reducir",pron:"ri-diús",object:"cloud spending",objectEs:"el gasto en la nube",past:"reduced",participle:"reduced"},
+ {date:"2026-10-18",verb:"investigate",meaning:"investigar",pron:"in-vés-ti-gueit",object:"the cost increase",objectEs:"el aumento de costos",past:"investigated",participle:"investigated"},
+ {date:"2026-10-25",verb:"allocate",meaning:"asignar",pron:"á-lo-keit",object:"cloud costs",objectEs:"los costos de la nube",past:"allocated",participle:"allocated"},
+ {date:"2026-11-01",verb:"optimize",meaning:"optimizar",pron:"óp-ti-maiz",object:"cloud resources",objectEs:"los recursos de la nube",past:"optimized",participle:"optimized"},
+ {date:"2026-11-08",verb:"forecast",meaning:"proyectar",pron:"fór-kast",object:"cloud spending",objectEs:"el gasto en la nube",past:"forecast",participle:"forecast"},
+ {date:"2026-11-15",verb:"negotiate",meaning:"negociar",pron:"ni-góu-shi-eit",object:"cloud contracts",objectEs:"los contratos de nube",past:"negotiated",participle:"negotiated"}
+];
+function startPlanDate(iso){return new Date(iso+"T12:00:00").toLocaleDateString("es-CL",{day:"numeric",month:"long"});}
+function startPlanExamples(item){
+ const base=item.verb+" "+item.object;
+ return [
+  ["Present Simple","I "+base+".","Yo "+item.meaning+" "+item.objectEs+"."],
+  ["Present Continuous","I am "+item.verb.replace(/e$/,"")+"ing "+item.object+".","Estoy "+({review:"revisando",identify:"identificando",reduce:"reduciendo",investigate:"investigando",allocate:"asignando",optimize:"optimizando",forecast:"proyectando",negotiate:"negociando"}[item.verb])+" "+item.objectEs+"."],
+  ["Past Simple","I "+item.past+" "+item.object+".","Yo "+item.past+" "+item.objectEs+"."]
+ ];
+}
+function renderStartPlan(){
+ const plan=document.getElementById("startPlan"),current=document.getElementById("startCurrent");
+ if(!plan||!current)return;
+ const today=new Date(),local=today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,"0")+"-"+String(today.getDate()).padStart(2,"0");
+ let active=0;startVerbPlan.forEach((item,i)=>{if(item.date<=local)active=i;});
+ const first=startVerbPlan[active], next=startVerbPlan[active+1];
+ current.innerHTML='<strong>📍 Tu verbo '+(active+1)+': '+first.verb+' = '+first.meaning+'</strong><p>Semana del '+startPlanDate(first.date)+(next?' al '+startPlanDate(new Date(new Date(next.date+"T12:00:00").getTime()-86400000).toISOString().slice(0,10)):' en adelante')+'. Empieza con las tres estructuras de abajo.</p>';
+ plan.innerHTML=startVerbPlan.map((item,i)=>{
+ const examples=startPlanExamples(item);
+ return '<details class="start-week" '+(i===active?'open':'')+'><summary><span>Semana '+(i+1)+' · '+startPlanDate(item.date)+'</span><strong>'+item.verb+' — '+item.meaning+'</strong>'+(i===active?'<span class="start-now">Esta semana</span>':'')+'</summary><div class="start-week-body"><p><strong>Pronunciación aproximada:</strong> '+item.pron+' · <strong>Idea fija:</strong> '+item.meaning+' '+item.objectEs+'.</p><div class="start-example-list">'+examples.map(e=>'<div><small>'+e[0]+'</small><strong>'+e[1]+'</strong><span>'+e[2]+'</span></div>').join('')+'</div><p class="start-note">Primero identifica qué cambia en el verbo. Luego intenta decir cada frase sin mirar.</p></div></details>';
+ }).join("");
+}
+renderStartPlan();
+document.getElementById("startGoPractice")?.addEventListener("click",()=>{
+ document.querySelectorAll(".tab-button").forEach(b=>b.classList.remove("active"));
+ document.querySelectorAll(".tab-content").forEach(s=>s.classList.remove("active"));
+ document.querySelector('[data-tab="practice"]')?.classList.add("active");
+ document.getElementById("practice")?.classList.add("active");
+ window.scrollTo({top:0,behavior:"smooth"});
+});
